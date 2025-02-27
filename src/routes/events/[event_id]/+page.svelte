@@ -82,7 +82,14 @@
 						<div class="alert alert-success mb-4">
 							Registration successful! Thank you for registering, we have awarded you with +35
 							points<Medal />
+							<br />
 						</div>
+						{#if event.external && event.needs_groups}
+							You are required to join a group <a
+								class="link link-primary"
+								href={`/community/event-groups/${event.id}`}>Click here to join or create a group</a
+							>
+						{/if}
 					{:else if moment(event.date).isBefore(moment())}
 						<div class="alert alert-error mb-4">Registrations have been closed.</div>
 					{:else if isLoading}

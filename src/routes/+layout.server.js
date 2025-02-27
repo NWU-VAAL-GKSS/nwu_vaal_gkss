@@ -22,8 +22,12 @@ export const load = async({request, locals: {supabase}}) => {
                     currentUser = member;                 
                 }
             });
+            if(!isMember){
+                //return the current user
+                currentUser = members.filter(member => member.id == user.id)
+            }
 
-            if(isMember){
+            if(currentUser && currentUser.image){
                 let publicUrl = await supabase.storage.from("files").getPublicUrl(currentUser.image.substring(currentUser.image.indexOf("/")));//removing the first "file/"
                 currentUser = {...currentUser,image: publicUrl.data.publicUrl}
             }

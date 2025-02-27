@@ -83,7 +83,7 @@
 				<a href="/community/search" class="navItem text-lg"><Search /> Search</a>
 			</li>
 			<li>
-				<a href="/community" class="navItem text-lg"><Users /> Discussions</a>
+				<a href="/community" class="navItem text-lg"><MessageCircleMore /> Discussions</a>
 			</li>
 			<li>
 				<a href="/community/tools" class="navItem text-lg"><Bot />Geek Tools</a>
@@ -99,6 +99,9 @@
 			{#if data.isLoggedIn}
 				<li>
 					<a href="/community/ideas" class="navItem text-lg"><Lightbulb /> Saved ideas</a>
+				</li>
+				<li>
+					<a href="/community/event-groups" class="navItem text-lg"><Users /> Event Groups</a>
 				</li>
 				<li><a href="/community/profile" class="navItem text-lg"><User /> Profile</a></li>
 				<li>
@@ -166,7 +169,7 @@
 			href="/community"
 			class="flex flex-col items-center text-sm text-gray-600 transition hover:text-primary"
 		>
-			<Users class="h-5 w-5" />
+			<MessageCircleMore class="h-5 w-5" />
 			<span>Discussions</span>
 		</a>
 
@@ -225,6 +228,9 @@
 					<a href="/community/idea-generator" class="navItem text-lg"><Brain /> Idea Generator</a>
 				</li>
 				{#if data.isLoggedIn}
+					<li>
+						<a href="/community/event-groups" class="navItem text-lg"><Users /> Event Groups</a>
+					</li>
 					<li>
 						<a href="/community/ideas" class="navItem text-lg"><Lightbulb /> Saved ideas</a>
 					</li>

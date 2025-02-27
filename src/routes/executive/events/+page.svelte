@@ -14,7 +14,16 @@
 	let array = [];
 	let { data, form } = $props();
 	let events = $state(data.events);
-	let editData = $state({ topic: '', description: '', venue: '', date: '', public: '' });
+	let editData = $state({
+		topic: '',
+		description: '',
+		venue: '',
+		date: '',
+		public: true,
+		needs_groups: false,
+		is_external: false,
+		external_link: ''
+	});
 	let isEditing = $state(false);
 
 	const handleDelete = (id) => {
@@ -195,17 +204,47 @@
 					bind:value={editData.venue}
 				/>
 			</label>
-			<div class="form-control w-52">
-				<label class="label cursor-pointer">
-					<span class="label-text">Make event public</span>
+			<label class="label cursor-pointer">
+				<span class="form-control">Make event public</span>
+				<input
+					bind:checked={editData.public}
+					type="checkbox"
+					name="public"
+					class="toggle toggle-primary"
+				/>
+			</label>
+			<label class="label cursor-pointer">
+				<span class="form-control">Requires groups?</span>
+				<input
+					bind:checked={editData.needs_groups}
+					type="checkbox"
+					name="needs_groups"
+					class="toggle toggle-primary"
+				/>
+			</label>
+			<label class="label cursor-pointer">
+				<span class="form-control">External Event?</span>
+				<input
+					bind:checked={editData.is_external}
+					type="checkbox"
+					name="is_external"
+					class="toggle toggle-primary"
+				/>
+			</label>
+			{#if editData.is_external}
+				<label class="form-control w-full">
+					<p>External link</p>
 					<input
-						bind:checked={editData.public}
-						type="checkbox"
-						name="public"
-						class="toggle toggle-primary"
+						type="url"
+						name="external_link"
+						class="input input-bordered"
+						id="external_link"
+						placeholder="Provide the link for registration"
+						bind:value={editData.external_link}
+						required
 					/>
 				</label>
-			</div>
+			{/if}
 			<label class="form-control w-full">
 				<p>Date and Time</p>
 				<input
