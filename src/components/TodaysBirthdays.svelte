@@ -3,7 +3,7 @@
 </script>
 
 {#if todaysBirthdays.length > 0}
-	<h1 class="text-center text-4xl font-extrabold text-black">Today's birthdays</h1>
+	<h1 class="text-center text-2xl font-extrabold text-black">Today's birthdays</h1>
 	<div class="grid grid-cols-1 gap-6 p-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
 		{#each todaysBirthdays as member}
 			<div
