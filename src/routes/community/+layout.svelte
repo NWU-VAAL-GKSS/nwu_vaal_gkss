@@ -101,6 +101,9 @@
 				<li>
 					<a href="/community/event-groups" class="navItem text-lg"><Users /> Event Groups</a>
 				</li>
+				<li>
+					<a href="/community/event-groups" class="navItem text-lg"><Users /> Event Groups</a>
+				</li>
 				<li><a href="/community/profile" class="navItem text-lg"><User /> Profile</a></li>
 				<li>
 					<a href="/community/create-topic" class="btn btn-primary"><PlusCircle /> Create topic</a>
