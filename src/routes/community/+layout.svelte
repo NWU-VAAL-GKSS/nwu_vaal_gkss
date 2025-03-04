@@ -6,6 +6,7 @@
 		ChartColumnBig,
 		CodeXml,
 		Dot,
+		FileEdit,
 		Forward,
 		Lightbulb,
 		LogIn,
@@ -77,7 +78,7 @@
 
 <main transition:slide class="flex min-h-screen divide-x bg-gray-200">
 	<div class="hidden min-h-screen w-2/12 flex-col items-center bg-white p-2 text-black lg:flex">
-		<ul class="menu min-h-full w-full space-y-2 p-2">
+		<ul class="menu min-h-full w-full space-y-1 p-2">
 			<h2 class="menu-title border-b text-xl font-bold text-gray-400">Community</h2>
 			<li>
 				<a href="/community/search" class="navItem text-lg"><Search /> Search</a>
@@ -86,7 +87,7 @@
 				<a href="/community" class="navItem text-lg"><MessageCircleMore /> Discussions</a>
 			</li>
 			<li>
-				<a href="/community/tools" class="navItem text-lg"><Bot />Geek Tools</a>
+				<a href="/community/quiz" class="navItem text-lg"><FileEdit />Quizzes</a>
 			</li>
 			<li>
 				<a href="/community/idea-generator" class="navItem text-lg"><Brain /> Idea Generator</a>
@@ -97,9 +98,6 @@
 			</li>
 
 			{#if data.isLoggedIn}
-				<li>
-					<a href="/community/ideas" class="navItem text-lg"><Lightbulb /> Saved ideas</a>
-				</li>
 				<li>
 					<a href="/community/event-groups" class="navItem text-lg"><Users /> Event Groups</a>
 				</li>
@@ -192,11 +190,11 @@
 		</a>
 
 		<a
-			href="/community/tools"
+			href="/community/quiz"
 			class="flex flex-col items-center text-sm text-gray-600 transition hover:text-primary"
+			><FileEdit /><span>Quizzes</span></a
 		>
-			<Bot class="h-6 w-6" /><span>Geek Tools</span>
-		</a>
+
 		<button
 			onclick={() => moreModal.show()}
 			class="flex flex-col items-center text-sm text-gray-600 transition hover:text-primary"
@@ -226,6 +224,11 @@
 				</li>
 				<li>
 					<a href="/community/idea-generator" class="navItem text-lg"><Brain /> Idea Generator</a>
+				</li>
+				<li>
+					<a href="/community/tools" class="navItem text-lg">
+						<Bot /><span>Geek Tools</span>
+					</a>
 				</li>
 				{#if data.isLoggedIn}
 					<li>

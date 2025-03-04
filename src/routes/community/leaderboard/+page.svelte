@@ -1,6 +1,7 @@
 <script>
 	import { onMount } from 'svelte';
 	import Loading from '../../../components/Loading.svelte';
+	import { slide } from 'svelte/transition';
 
 	let { data, form } = $props();
 
@@ -34,10 +35,30 @@
 		tab = validTabs.includes(newTab) ? newTab : 'all';
 	};
 
-	onMount(() => {
+	onMount(async () => {
 		window.addEventListener('hashchange', handleHashChange);
 		handleHashChange();
 		isLoading = false;
+		const response = await fetch('/community/api/getLeaderBoard', {
+			method: 'GET'
+		});
+		const res = await response.json();
+		if (res.success) {
+			members = res.members
+				.filter((m) => m.name && m.username) // Filter valid members
+				.sort((a, b) => b.points - a.points || b.Project.length - a.Project.length)
+				.slice(0, 10);
+			projects = res.projects
+				.map((p) => ({
+					...p,
+					rating: p.rating?.length
+						? (p.rating.reduce((sum, r) => sum + r.rating, 0) / p.rating.length).toFixed(1)
+						: 'N/A'
+				}))
+				.sort((a, b) => b.rating - a.rating || a.name.localeCompare(b.name))
+				.slice(0, 10);
+		}
+
 		return () => window.removeEventListener('hashchange', handleHashChange);
 	});
 </script>
@@ -99,6 +120,7 @@
 							<tbody class="divide-y divide-gray-200">
 								{#each members as member, index}
 									<tr
+										transition:slide
 										on:click={() => (window.location = `/community/${member.username}`)}
 										class="cursor-pointer transition-colors hover:bg-gray-50"
 									>

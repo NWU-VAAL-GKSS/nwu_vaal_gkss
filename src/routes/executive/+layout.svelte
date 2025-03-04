@@ -1,6 +1,7 @@
 <script>
 	import {
 		ChartNoAxesColumn,
+		FileEdit,
 		HeartHandshake,
 		Home,
 		Link,
@@ -63,9 +64,9 @@
 			</a>
 		</li>
 		<li>
-			<a href="/executive/">
-				<HeartHandshake />
-				Sponsors
+			<a href="/executive/quizzes">
+				<FileEdit />
+				Quizzes
 			</a>
 		</li>
 		<li></li>

@@ -69,6 +69,18 @@
 			<p>Join any of the following groups below or create a new group</p>
 			{#if !groups.length}
 				<Loading />
+				<section class="mx-auto max-w-6xl px-4 py-4 sm:px-6 sm:py-8">
+					<ul role="list" class="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
+						{#each [1, 2, 3, 4, 5, 6] as num}
+							<div class="flex w-52 flex-col gap-4">
+								<div class="skeleton h-32 w-full"></div>
+								<div class="skeleton h-4 w-28"></div>
+								<div class="skeleton h-4 w-full"></div>
+								<div class="skeleton h-4 w-full"></div>
+							</div>
+						{/each}
+					</ul>
+				</section>
 			{/if}
 			<section class="mx-auto max-w-6xl px-4 py-4 sm:px-6 sm:py-8">
 				<ul role="list" class="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
