@@ -121,6 +121,7 @@
 					><FileEdit />Quizzes
 					<div class="badge badge-primary">{quizzes.length}</div></a
 				>
+
 			</li>
 			<li>
 				<a href="/community/idea-generator" class="navItem text-lg"><Brain /> Idea Generator</a>
@@ -226,6 +227,7 @@
 
 		<a
 			href="/community/quiz"
+
 			class="relative flex flex-col items-center text-sm text-gray-600 transition hover:text-primary"
 		>
 			<div class="relative">
@@ -238,6 +240,7 @@
 			</div>
 			<span>Quizzes</span>
 		</a>
+
 
 		<button
 			onclick={() => moreModal.show()}

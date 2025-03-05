@@ -9,6 +9,7 @@ export const load = async ({params,locals: {supabase}}) => {
         }
         return {quiz: quiz[0], alreadyCompleted};
     }
+
     else{
         if(!user){
             return {error: "User not authenticated"};
@@ -17,4 +18,5 @@ export const load = async ({params,locals: {supabase}}) => {
             return {error: "Quiz not found"}
         }
     }
+
 }

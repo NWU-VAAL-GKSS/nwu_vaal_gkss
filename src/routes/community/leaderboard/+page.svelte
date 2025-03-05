@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import Loading from '../../../components/Loading.svelte';
 	import { slide } from 'svelte/transition';
+
 	import { Award, Icon, Medal, Sparkles, Star, Trophy } from 'lucide-svelte';
 
 	let { data, form } = $props();
@@ -35,6 +36,7 @@
 		const newTab = location.hash.replace('#', '');
 		tab = validTabs.includes(newTab) ? newTab : 'all';
 	};
+
 	const fetchLeaderBoard = async () => {
 		const response = await fetch('/community/api/getLeaderBoard', {
 			method: 'GET'
@@ -56,10 +58,14 @@
 				.slice(0, 10);
 		}
 	};
+
+
+
 	onMount(async () => {
 		window.addEventListener('hashchange', handleHashChange);
 		handleHashChange();
 		isLoading = false;
+
 
 		// Initial fetch
 		fetchLeaderBoard();
@@ -73,6 +79,7 @@
 			window.removeEventListener('hashchange', handleHashChange);
 			clearInterval(interval);
 		};
+
 	});
 </script>
 
@@ -146,9 +153,11 @@
 							<tbody>
 								{#each members as member, index}
 									<tr
+
 										class="group cursor-pointer transition-all duration-300 hover:bg-gray-100"
 										onclick={() => (window.location = `/community/${member.username}`)}
 										transition:slide={{ delay: index * 50 }}
+
 									>
 										<!-- Rank Column -->
 										<td class="font-bold">
