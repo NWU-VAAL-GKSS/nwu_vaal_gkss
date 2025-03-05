@@ -55,7 +55,7 @@ export async function load({params, locals: {supabase}}) {
             //return the object with the user's topics and details
             let publicUrl = await supabase.storage.from("files").getPublicUrl(data[0].image.substring(data[0].image.indexOf("/")+1));//removing the first "file/"
             let image = publicUrl.data.publicUrl;
-            return {fullName: data[0].name + " " + data[0].surname,username,image,topics: allTopics, projects, user_rating, user_views};
+            return {fullName: data[0].name + " " + data[0].surname,username,image,topics: allTopics, projects, user_rating, user_views, points: data[0].points};
         }
         else{
             //the query was negative, as the username does not exist in the database, we throw error

@@ -94,8 +94,8 @@
 					<!-- Ratings -->
 					<div class="flex items-center justify-between rounded-lg bg-gray-50 p-4">
 						<div>
-							<p class="text-sm font-medium text-gray-500">Average Rating</p>
-							<p class="text-2xl font-bold text-gray-800">{data.user_rating.toFixed(1) || 0.0}</p>
+							<p class="text-sm font-medium text-gray-500">Total Points</p>
+							<p class="text-2xl font-bold text-gray-800">{data.points.toFixed(0) || 0.0} pts</p>
 						</div>
 						<Stars class="h-8 w-8 text-primary" />
 					</div>

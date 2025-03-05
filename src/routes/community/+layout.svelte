@@ -23,6 +23,8 @@
 	import Loading from '../../components/Loading.svelte';
 	import Editor from '../../components/Editor.svelte';
 	import { slide } from 'svelte/transition';
+	import { onMount } from 'svelte';
+	import moment from 'moment';
 
 	let { children, data } = $props();
 	let todaysBirthdays = data.members.filter((member) => {
@@ -74,6 +76,34 @@
 		location.reload();
 	}
 	let isLoading = $state(false);
+
+	//for quizzes
+	let quizzes = $state([]);
+	const fetchQuizzes = async () => {
+		try {
+			const response = await fetch('/executive/api/fetchQuizzes', {
+				method: 'GET'
+			});
+			const res = await response.json();
+			if (res.success) {
+				quizzes = res.quizzes.filter((quiz) => moment(quiz.due).isAfter(moment()));
+			}
+		} catch (error) {
+			console.error('Quiz fetch error:', error);
+		} finally {
+		}
+	};
+
+	onMount(() => {
+		// Initial fetch
+		fetchQuizzes();
+
+		// Set up polling every 30 seconds
+		const interval = setInterval(fetchQuizzes, 30000);
+
+		// Clear interval on component unmount
+		return () => clearInterval(interval);
+	});
 </script>
 
 <main transition:slide class="flex min-h-screen divide-x bg-gray-200">
@@ -87,7 +117,10 @@
 				<a href="/community" class="navItem text-lg"><MessageCircleMore /> Discussions</a>
 			</li>
 			<li>
-				<a href="/community/quiz" class="navItem text-lg"><FileEdit />Quizzes</a>
+				<a href="/community/quiz" class="navItem text-lg"
+					><FileEdit />Quizzes
+					<div class="badge badge-primary">{quizzes.length}</div></a
+				>
 			</li>
 			<li>
 				<a href="/community/idea-generator" class="navItem text-lg"><Brain /> Idea Generator</a>
@@ -143,18 +176,17 @@
 				{/each}
 			</div>
 			<div class="space-y-3 rounded-lg border p-3">
-				<h2 class="text-lg font-semibold text-black">Today's birthdays</h2>
-				{#if todaysBirthdays.length == 0}
-					<p class="text-gray-400">No birthdays for today😓</p>
+				<h2 class="text-lg font-semibold text-black">Open Quizzes</h2>
+
+				{#if quizzes.length == 0}
+					<p class="text-gray-400">No quizzes for today😓</p>
 				{/if}
-				{#each todaysBirthdays as member}
+				{#each quizzes as quiz}
 					<a
-						href={`/community/${member.username}`}
+						href={`/community/quiz/${quiz.id}`}
 						class="flex items-center gap-3 rounded-md p-2 hover:bg-gray-100"
 					>
-						<img src={member.image} alt={member.name} class="h-6 w-6 rounded-full" />
-
-						<span class="truncate text-base">{member.name} {member.surname}</span>
+						<span class="truncate text-base">{quiz.title}</span>
 					</a>
 				{/each}
 			</div>
@@ -191,9 +223,18 @@
 
 		<a
 			href="/community/quiz"
-			class="flex flex-col items-center text-sm text-gray-600 transition hover:text-primary"
-			><FileEdit /><span>Quizzes</span></a
+			class="relative flex flex-col items-center text-sm text-gray-600 transition hover:text-primary"
 		>
+			<div class="relative">
+				<FileEdit />
+				<span
+					class="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-xs text-white"
+				>
+					{quizzes.length}
+				</span>
+			</div>
+			<span>Quizzes</span>
+		</a>
 
 		<button
 			onclick={() => moreModal.show()}

@@ -16,7 +16,6 @@ export const GET = async ({locals: {supabase}}) => {
         projects.push({...project,rating: rating})
     }
 
-    console.log("happening")
     return json({success: true,members,projects});
 }
 
