@@ -36,6 +36,13 @@
 				class="navItem border-red-500 hover:border-b hover:text-white"
 				class:selected={$page.url.pathname === '/about'}>About</a
 			>
+
+			<a
+				href="/gallery"
+				class="navItem border-red-500 hover:border-b hover:text-white"
+				class:selected={currentPath === '/gallery'}>Gallery</a
+			>
+
 			<a
 				href="/events"
 				class="navItem border-red-500 hover:border-b hover:text-white"
@@ -110,6 +117,16 @@
 						>About</a
 					>
 				</li>
+
+				<li>
+					<a
+						href="/gallery"
+						data-sveltekit-reload
+						class="navItem text-lg"
+						class:selected={currentPath === '/gallery'}>Gallery</a
+					>
+				</li>
+
 				<li>
 					<a
 						href="/events"
